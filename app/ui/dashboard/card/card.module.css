@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    align-items: start;
+    background-color: var(--bgSoft);
+    padding: 20px;
+    border-radius: 10px;
+    gap: 20px;
+cursor: pointer;
+width: 100%;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.container:hover
+{
+  background-color: #2e374a;  
+}
+
+.texts{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.number
+{
+    font-size: 24px;
+    font-weight: 500;
+}
+.details
+{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.positive
+{
+    color: limegreen;
+}
+
+.negative{
+    color: red;
+}
