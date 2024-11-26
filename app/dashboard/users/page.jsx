@@ -107,46 +107,6 @@ const User = () => {
         
                     </td>
                 </tr>
-                 <tr>
-                    <td>
-                     <div className={styles.user}>
-                    <Image 
-                    className={styles.userImage} 
-                    src="/noavatar.png" 
-                    alt="user" 
-                    width={40}
-                     height={40} 
-                     />
-                      Jimmy Baker
-                    </div>
-                    </td>
-                    <td>JimmyBaker@info.gov
-                    </td>
-                    <td>2.01.2025</td>
-                    <td>Admin</td>
-                    <td>active</td>
-                    <td>
-              <div className={styles.buttons}>
-                      <Link href="/dashboard/users/add">
-                    <button 
-                    className={`
-                    ${styles.button}
-                    ${styles.view}
-                    `
-                    }><MdViewModule size={20}/></button>
-                     </Link>
-                      <Link href="/dashboard/users/add">
-                    <button 
-                    className={`
-                    ${styles.button}
-                    ${styles.delete}
-                    `
-                    }><MdDelete size={20}/></button>
-                     </Link>
-              </div>
-        
-                    </td>
-                </tr>
             </tbody>
 
         </table>
