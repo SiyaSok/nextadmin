@@ -35,6 +35,8 @@ cursor: pointer;
     cursor:pointer;
     border-radius: 5px;
     color: var(--text);
+    border: none;
+    outline: none;
 }
 .view
 {
