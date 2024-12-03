@@ -1,0 +1,70 @@
+/** @format */
+
+.container {
+  display: flex;
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.infoContainer {
+  flex: 1;
+  background-color: var(--bgSoft);
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: var(--text);
+  height: max-content;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.formContainer {
+  flex: 3;
+  background-color: var(--bgSoft);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form input,
+.form textarea,
+.form select,
+.form textarea {
+  padding: 30px;
+  background-color: transparent;
+  border: none;
+  color: var(--text);
+  border-radius: 5px;
+  margin-bottom: 30px;
+  background-color: var(--bg);
+}
+.form select,
+.form input,
+.form textarea {
+  width: 100%;
+}
+
+.form button {
+  padding: 15px 30px;
+  background-color: teal;
+  color: var(--text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: tealc0;
+}
