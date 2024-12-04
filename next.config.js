@@ -10,6 +10,7 @@ const nextConfig = {
       "i2.wp.com",
       "www.cameo.com",
       "mir-s3-cdn-cf.behance.net",
+      "i5-images.massmart.co.za",
     ],
   },
 };
