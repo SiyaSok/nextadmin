@@ -6,8 +6,11 @@ import styles from "@/app/ui/dashboard/products/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { MdDelete, MdViewAgenda, MdViewModule } from "react-icons/md";
+import { fetchProducts } from "@/app/lib/data";
 
-const Products = () => {
+const Products = async ({ searchParams }) => {
+  const q = searchParams?.q || "";
+  const products = await fetchProducts(q);
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -28,171 +31,49 @@ const Products = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className={styles.product}>
-                <Image
-                  className={styles.productImage}
-                  src='/noproduct.jpg'
-                  alt='user'
-                  width={40}
-                  height={40}
-                />
-                Canon EOS M6
-              </div>
-            </td>
-            <td>Canon EOS M6 with 18-150mm Lens - Silver</td>
-            <td>R 7,435</td>
-            <td>2.01.2025</td>
-            <td>50</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href='/dashboard/products/8989898989'>
-                  <button
-                    className={`
+          {products &&
+            products.map((product) => (
+              <tr key={product._id}>
+                <td>
+                  <div className={styles.product}>
+                    <Image
+                      className={styles.productImage}
+                      src={product.img ?? "/noproduct.jpg"}
+                      alt='user'
+                      width={40}
+                      height={40}
+                    />
+                    {product.title}
+                  </div>
+                </td>
+                <td>{product.desc}</td>
+                <td>R {product.price}</td>
+                <td>{product.createdAt?.toString().slice(4, 16)}</td>
+                <td>{product.stock}</td>
+                <td>
+                  <div className={styles.buttons}>
+                    <Link href={`/dashboard/products/${product._id}`}>
+                      <button
+                        className={`
                     ${styles.button}
                     ${styles.view}
                     `}>
-                    <MdViewModule size={20} />
-                  </button>
-                </Link>
-                <Link href='/dashboard/users/add'>
-                  <button
-                    className={`
+                        <MdViewModule size={20} />
+                      </button>
+                    </Link>
+                    <Link href='/dashboard/users/add'>
+                      <button
+                        className={`
                     ${styles.button}
                     ${styles.delete}
                     `}>
-                    <MdDelete size={20} />
-                  </button>
-                </Link>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className={styles.product}>
-                <Image
-                  className={styles.productImage}
-                  src='/noproduct.jpg'
-                  alt='user'
-                  width={40}
-                  height={40}
-                />
-                Bella Casa Sideboard
-              </div>
-            </td>
-            <td>Bella Casa Sideboard 4 Doors White + White Retro Feet</td>
-            <td>R 4,750</td>
-            <td>2.01.2025</td>
-            <td>10</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href='/dashboard/products/8989898989'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.view}
-                    `}>
-                    <MdViewModule size={20} />
-                  </button>
-                </Link>
-                <Link href='/dashboard/users/add'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.delete}
-                    `}>
-                    <MdDelete size={20} />
-                  </button>
-                </Link>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className={styles.product}>
-                <Image
-                  className={styles.productImage}
-                  src='/noproduct.jpg'
-                  alt='user'
-                  width={40}
-                  height={40}
-                />
-                Silicone Kitchenware
-              </div>
-            </td>
-            <td>
-              Silicone Kitchenware Kit 19 Pieces Knife & Spoon Set With Storage
-              Rack
-            </td>
-            <td>R 286</td>
-            <td>2.01.2025</td>
-            <td>150</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href='/dashboard/products/8989898989'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.view}
-                    `}>
-                    <MdViewModule size={20} />
-                  </button>
-                </Link>
-                <Link href='/dashboard/users/add'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.delete}
-                    `}>
-                    <MdDelete size={20} />
-                  </button>
-                </Link>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className={styles.product}>
-                <Image
-                  className={styles.productImage}
-                  src='/noproduct.jpg'
-                  alt='user'
-                  width={40}
-                  height={40}
-                />
-                Air Fryer
-              </div>
-            </td>
-            <td>
-              Bennett Read 9.7L Triple Multi-Zone Air Fryer - Stainless Steel
-            </td>
-            <td>R 1,949</td>
-            <td>2.01.2025</td>
-            <td>108</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href='/dashboard/products/8989898989'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.view}
-                    `}>
-                    <MdViewModule size={20} />
-                  </button>
-                </Link>
-                <Link href='/dashboard/users/add'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.delete}
-                    `}>
-                    <MdDelete size={20} />
-                  </button>
-                </Link>
-              </div>
-            </td>
-          </tr>
+                        <MdDelete size={20} />
+                      </button>
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <Pagination />

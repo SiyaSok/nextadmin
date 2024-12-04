@@ -6,13 +6,11 @@ import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/users/users.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { MdDelete, MdViewAgenda, MdViewModule } from "react-icons/md";
+import { MdDelete, MdViewModule } from "react-icons/md";
 
-const User = async () => {
-  const user = await fetchUsers();
-
-  console.log(user);
-
+const User = async ({ searchParams }) => {
+  const q = searchParams?.q || "";
+  const user = await fetchUsers(q);
   return (
     <div className={styles.container}>
       <div className={styles.top}>
