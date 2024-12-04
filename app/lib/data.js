@@ -5,7 +5,7 @@ import { connectToDB } from "./utiils";
 
 export const fetchUsers = async (q, page) => {
   const regex = new RegExp(q, "i");
-  const ITEM_PER_PAGE = parseInt(process.env.ITEM_PER_PAGE);
+  const ITEM_PER_PAGE = parseInt(process.env.ITEM_PER_PAGE) || 8;
   const SKIP_PAGE = ITEM_PER_PAGE * (page - 1);
   try {
     await connectToDB();
@@ -23,7 +23,7 @@ export const fetchUsers = async (q, page) => {
 
 export const fetchProducts = async (q, page) => {
   const regex = new RegExp(q, "i");
-  const ITEM_PER_PAGE = parseInt(process.env.ITEM_PER_PAGE);
+  const ITEM_PER_PAGE = parseInt(process.env.ITEM_PER_PAGE) || 8;
   const SKIP_PAGE = ITEM_PER_PAGE * (page - 1);
   try {
     await connectToDB();
