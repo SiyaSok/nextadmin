@@ -1,5 +1,6 @@
 /** @format */
 
+import { fetchUsers } from "@/app/lib/data";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/users/users.module.css";
@@ -7,7 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { MdDelete, MdViewAgenda, MdViewModule } from "react-icons/md";
 
-const User = () => {
+const User = async () => {
+  const user = await fetchUsers();
+
+  console.log(user);
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -28,86 +33,49 @@ const User = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className={styles.user}>
-                <Image
-                  className={styles.userImage}
-                  src='/noavatar.png'
-                  alt='user'
-                  width={40}
-                  height={40}
-                />
-                Jimmy Baker
-              </div>
-            </td>
-            <td>JimmyBaker@info.gov</td>
-            <td>2.01.2025</td>
-            <td>Admin</td>
-            <td>active</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href='/dashboard/users/8989898989'>
-                  <button
-                    className={`
+          {user &&
+            user.map((user) => (
+              <tr key={user._id}>
+                <td>
+                  <div className={styles.user}>
+                    <Image
+                      className={styles.userImage}
+                      src={user.img}
+                      alt='user'
+                      width={40}
+                      height={40}
+                    />
+                    {user.username}
+                  </div>
+                </td>
+                <td> {user.email}</td>
+                <td>{user.createdAt?.toString().slice(4, 16)}</td>
+                <td> {user.isAdmin ? "Admin" : "User"}</td>
+                <td>{user.isActive ? "Active" : "passive"}</td>
+                <td>
+                  <div className={styles.buttons}>
+                    <Link href={`/dashboard/users/${user._id}`}>
+                      <button
+                        className={`
                     ${styles.button}
                     ${styles.view}
                     `}>
-                    <MdViewModule size={20} />
-                  </button>
-                </Link>
-                <Link href='/dashboard/users/add'>
-                  <button
-                    className={`
+                        <MdViewModule size={20} />
+                      </button>
+                    </Link>
+                    <Link href='/dashboard/users/add'>
+                      <button
+                        className={`
                     ${styles.button}
                     ${styles.delete}
                     `}>
-                    <MdDelete size={20} />
-                  </button>
-                </Link>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className={styles.user}>
-                <Image
-                  className={styles.userImage}
-                  src='/noavatar.png'
-                  alt='user'
-                  width={40}
-                  height={40}
-                />
-                Jimmy Baker
-              </div>
-            </td>
-            <td>JimmyBaker@info.gov</td>
-            <td>2.01.2025</td>
-            <td>Admin</td>
-            <td>active</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href='/dashboard/users/8989898989'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.view}
-                    `}>
-                    <MdViewModule size={20} />
-                  </button>
-                </Link>
-                <Link href='/dashboard/users/add'>
-                  <button
-                    className={`
-                    ${styles.button}
-                    ${styles.delete}
-                    `}>
-                    <MdDelete size={20} />
-                  </button>
-                </Link>
-              </div>
-            </td>
-          </tr>
+                        <MdDelete size={20} />
+                      </button>
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <Pagination />
